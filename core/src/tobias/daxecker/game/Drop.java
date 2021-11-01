@@ -9,10 +9,13 @@ public class Drop extends Game {
     public SpriteBatch batch;
     public BitmapFont font;
 
+    public PersistentData data;
+
     @Override
     public void create() {
         batch = new SpriteBatch();
         font = new BitmapFont();
+        data  = PersistentData.getPersistentData();
         this.setScreen(new MainMenuScreen(this));
     }
 

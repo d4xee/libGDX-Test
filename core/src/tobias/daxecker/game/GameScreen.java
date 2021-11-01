@@ -73,6 +73,7 @@ public class GameScreen implements Screen {
         // start the playback of the background music
         // when the screen is shown
         rainMusic.play();
+        rainMusic.setVolume(0.5f);
     }
 
     @Override
@@ -94,6 +95,7 @@ public class GameScreen implements Screen {
         // all drops
         game.batch.begin();
         game.font.draw(game.batch, "Drops Collected: " + dropsGathered, 0, 480);
+        game.font.draw(game.batch, "Highscore: " + game.data.highscore, 700, 480);
         game.batch.draw(bucketImage, bucket.x, bucket.y, bucket.width, bucket.height);
         for (Rectangle raindrop : raindrops) {
             game.batch.draw(dropImage, raindrop.x, raindrop.y);
@@ -133,10 +135,15 @@ public class GameScreen implements Screen {
                 iter.remove();
             if (raindrop.overlaps(bucket)) {
                 dropsGathered++;
+                if (game.data.highscore < dropsGathered) {
+                    game.data.highscore = dropsGathered;
+                }
                 dropSound.play();
                 iter.remove();
             }
         }
+
+        PersistentData.writePersistentData(game.data);
     }
 
     @Override
