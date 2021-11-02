@@ -15,7 +15,7 @@ public class Drop extends Game {
     public void create() {
         batch = new SpriteBatch();
         font = new BitmapFont();
-        data  = PersistentData.getPersistentData();
+        data  = DataManager.getInstance().getData();
         this.setScreen(new MainMenuScreen(this));
     }
 

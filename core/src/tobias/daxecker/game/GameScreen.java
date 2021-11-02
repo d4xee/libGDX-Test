@@ -30,6 +30,8 @@ public class GameScreen implements Screen {
     long lastDropTime;
     int dropsGathered;
 
+    DataManager manager;
+
     public GameScreen(final Drop game) {
         this.game = game;
 
@@ -53,6 +55,8 @@ public class GameScreen implements Screen {
 
         bucket.width = 64;
         bucket.height = 64;
+
+        manager = DataManager.getInstance();
 
         raindrops = new Array<Rectangle>();
         spawnRaindrop();
@@ -143,7 +147,7 @@ public class GameScreen implements Screen {
             }
         }
 
-        PersistentData.writePersistentData(game.data);
+        manager.writeData(game.data);
     }
 
     @Override
